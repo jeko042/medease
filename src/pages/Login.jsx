@@ -85,7 +85,8 @@ const Login = () => {
             </Link>
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
-            <button type="submit">Login</button>
+            <button style={{ cursor:"pointer" }} type="submit"> Login </button>
+            
           </div>
         </form>
       </div>

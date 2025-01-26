@@ -132,7 +132,8 @@ const Register = () => {
             </Link>
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
-            <button type="submit">Register</button>
+            <button style={{ cursor:"pointer" }} type="submit">Register</button>
+            
           </div>
         </form>
       </div>
