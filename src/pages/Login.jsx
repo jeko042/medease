@@ -29,7 +29,7 @@ const Login = () => {
           toast.success(res.data.message);
           setIsAuthenticated(true);
           navigateTo("/");
-          setEmail("");
+          setEmail(""); 
           setPassword("");
           setConfirmPassword("");
         });

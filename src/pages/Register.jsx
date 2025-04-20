@@ -18,8 +18,22 @@ const Register = () => {
 
   const navigateTo = useNavigate();
 
+
+  const getMaxDobDate = () => {
+    const today = new Date();
+    today.setFullYear(today.getFullYear() - 17);
+    return today.toISOString().split("T")[0];
+  };
+
   const handleRegistration = async (e) => {
     e.preventDefault();
+
+    
+    if (Number(nic) < 17) {
+      toast.error("You must be at least 17 years old to register.");
+      return;
+    }
+
     try {
       await axios
         .post(
@@ -58,7 +72,7 @@ const Register = () => {
         <h2>Sign Up</h2>
         <p>Please Sign Up To Continue</p>
         <p>
-        sampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletext?
+          sampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletextsampletext?
         </p>
         <form onSubmit={handleRegistration}>
           <div>
@@ -94,13 +108,22 @@ const Register = () => {
               type="number"
               placeholder="Age"
               value={nic}
-              onChange={(e) => setNic(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "" || Number(value) >= 17) {
+                  setNic(value);
+                }
+              }}
+              min="17"
+              required
             />
             <input
-              type={"date"}
+              type="date"
               placeholder="Date of Birth"
               value={dob}
               onChange={(e) => setDob(e.target.value)}
+              max={getMaxDobDate()} 
+              required
             />
           </div>
           <div>
@@ -132,8 +155,9 @@ const Register = () => {
             </Link>
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
-            <button style={{ cursor:"pointer" }} type="submit">Register</button>
-            
+            <button style={{ cursor: "pointer" }} type="submit">
+              Register
+            </button>
           </div>
         </form>
       </div>
